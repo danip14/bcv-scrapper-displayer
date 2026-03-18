@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasa BCV - Visualizador</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="bcv-logo.ico" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="header-content">
+          <img src="bcv-logo.png" alt="BCV Logo" class="bcv-logo" />
+          <h1><i class="fas fa-chart-line"></i> Tasa BCV en Tiempo Real</h1>
+        </div>
+        <div class="last-update" id="last-update">
+          Última actualización: <span>Cargando...</span>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="currency-grid">
+          <div class="currency-card" id="usd-card">
+            <div class="currency-header">
+              <i class="fas fa-dollar-sign"></i>
+              <h2>Dólar Estadounidense</h2>
+            </div>
+            <div class="currency-value">
+              <span class="amount" id="usd-amount">Cargando...</span>
+              <span class="currency-code">VES/USD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <button id="refresh-btn" class="btn-primary">
+            <i class="fas fa-sync-alt"></i> Actualizar Ahora
+          </button>
+          <button id="auto-refresh-toggle" class="btn-secondary">
+            <i class="fas fa-play-circle"></i> Auto-actualizar (30s)
+          </button>
+          <button id="notification-toggle" class="btn-secondary">
+            <i class="fas fa-bell"></i> Notificaciones:
+            <span id="notification-status">OFF</span>
+          </button>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <p>
+          Datos proporcionados por
+          <a href="https://www.bcv.org.ve/" target="_blank">https://www.bcv.org.ve/</a>
+        </p>
+        <p>
+          Actualización automática cada 30 segundos | Última verificación:
+          <span id="last-check">--:--:--</span>
+        </p>
+        <!-- Firma del desarrollador -->
+        <p class="developer-credit">
+          Desarrollado por <a href="https://github.com/danip14" target="_blank">Daniel Prieto</a>
+        </p>
+      </footer>
+    </div>
+
+    <!-- Modal de configuración -->
+    <div class="modal" id="config-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-cog"></i> Configuración</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting">
+            <label for="refresh-interval">Intervalo de actualización (segundos):</label>
+            <select id="refresh-interval">
+              <option value="10">10 segundos</option>
+              <option value="30" selected>30 segundos</option>
+              <option value="60">1 minuto</option>
+              <option value="300">5 minutos</option>
+            </select>
+          </div>
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="sound-toggle" />
+              Sonido al actualizar
+            </label>
+          </div>
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="start-minimized" />
+              Iniciar minimizado
+            </label>
+          </div>
+          <div class="setting">
+            <label for="theme-select">Tema de colores:</label>
+            <select id="theme-select">
+              <option value="light" selected>Claro</option>
+              <option value="dark">Oscuro</option>
+              <option value="blue">Azul</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="save-settings" class="btn-primary">Guardar Configuración</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notificación flotante -->
+    <div class="notification" id="notification">
+      <div class="notification-content">
+        <i class="fas fa-dollar-sign"></i>
+        <span id="notification-text">Tasa BCV actualizada</span>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
